@@ -27,19 +27,16 @@ class App extends Component {
     });
   }
 
-  onLogoutPress() {
-    firebase.auth().signOut()
-      .then(this.onLogoutSuccess.bind(this))
-  }
-
-  onLogoutSuccess() {
-    this.setState({ loggedIn: false });
-  }
-
   renderContent() {
     switch (this.state.loggedIn) {
       case true:
-        return <CardSection><Button onPress={this.onLogoutPress.bind(this)}>Log Out</Button></CardSection>;
+        return(
+          <CardSection>
+            <Button onPress={ () => firebase.auth().signOut()}>
+              Log Out
+            </Button>
+          </CardSection>
+        );
       case false:
         return <LoginForm />;
       default:
